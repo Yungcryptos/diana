@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Для Дианочки ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color: transparent;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px 15px;
+font-family:'Montserrat',sans-serif;
+background:linear-gradient(-45deg,#ff7eb9,#ff65a3,#ff8fab,#ffc2e2);
+background-size:400% 400%;
+animation:gradient 15s ease infinite;
+color:white;
+overflow-x:hidden;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+.card{
+position:relative;
+background:rgba(255,255,255,0.18);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+padding:30px 20px;
+border-radius:25px;
+max-width:850px;
+width:100%;
+box-shadow:0 15px 50px rgba(255,0,120,0.25);
+text-align:center;
+animation:fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(30px)}
+to{opacity:1; transform:translateY(0)}
+}
+
+h1{
+font-family:'Marck Script',cursive;
+font-size:42px;
+margin-bottom:20px;
+text-shadow:0 0 20px rgba(255,255,255,0.8);
+}
+
+.text{
+font-size:16px;
+line-height:1.6;
+margin-bottom:25px;
+padding:0 5px;
+}
+
+.photos{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-bottom:25px;
+flex-wrap:wrap;
+}
+
+.photo-frame{
+width:160px;
+height:210px;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 0 25px rgba(255,0,150,0.5);
+transition:0.3s;
+}
+
+.photo-frame img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.photo-frame:active{
+transform:scale(0.97);
+}
+
+button{
+padding:14px 30px;
+border:none;
+border-radius:40px;
+font-size:18px;
+background:linear-gradient(45deg,#ff4da6,#ff99dd);
+color:white;
+cursor:pointer;
+box-shadow:0 0 20px rgba(255,0,130,0.6);
+transition:0.2s;
+width:100%;
+max-width:300px;
+}
+
+button:active{
+transform:scale(0.95);
+}
+
+.heart{
+position:fixed;
+top:-20px;
+font-size:18px;
+animation:fall linear forwards;
+pointer-events:none;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh);opacity:0;}
+}
+
+.firework{
+position:fixed;
+width:6px;
+height:6px;
+border-radius:50%;
+animation:explode 1.2s ease-out forwards;
+pointer-events:none;
+}
+
+@keyframes explode{
+0%{opacity:1;transform:translate(0,0);}
+100%{opacity:0;transform:translate(var(--x),var(--y));}
+}
+
+@media(max-width:480px){
+h1{font-size:34px;}
+.text{font-size:15px;}
+.photo-frame{width:140px;height:190px;}
+}
+</style>
+</head>
+<body>
+
+<audio id="music" loop>
+<source src="pon.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+<h1>Дианочка ❤️</h1>
+
+<div class="photos">
+<div class="photo-frame">
+<img src="diana1.jpg" alt="Диана">
+</div>
+
+<div class="photo-frame">
+<img src="diana2.jpg" alt="Диана">
+</div>
+</div>
+
+<div class="text">
+я в этот раз не подарил тебе подарок…
+но ты знаешь, что ты - это самое ценное, что есть в моей жизни.
+я рад, что мне не нужны деньги, чтобы любить тебя.
+я люблю тебя БЕЗУМНО сильно, искренне и ПО НАСТОЯЩЕМУ!!!
+и этот сайт только маленькая частица моей любви к тебе
+прости меня, пожалуйста 💖
+</div>
+
+<button onclick="forgive()">Простить 💕</button>
+
+</div>
+
+<script>
+const music=document.getElementById("music");
+
+/* сердца */
+function createHeart(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💗";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+heart.style.fontSize=(Math.random()*15+14)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,500);
+
+/* фейерверк */
+function createFirework(x,y){
+for(let i=0;i<120;i++){
+const dot=document.createElement("div");
+dot.className="firework";
+dot.style.left=x+"px";
+dot.style.top=y+"px";
+dot.style.background=`hsl(${Math.random()*360},100%,70%)`;
+dot.style.setProperty("--x",(Math.random()-0.5)*window.innerWidth*1.5+"px");
+dot.style.setProperty("--y",(Math.random()-0.5)*window.innerHeight*1.5+"px");
+document.body.appendChild(dot);
+setTimeout(()=>dot.remove(),1200);
+}
+}
+
+function forgive(){
+music.play().catch(()=>{});  // ▶ музыка включается ТОЛЬКО тут
+createFirework(window.innerWidth/2,window.innerHeight/2);
+setTimeout(()=>{
+alert("спасибо моя любимая Дианочкаа ❤️ я буду стараться радовать тебя каждый день!!!!!!!!");
+},900);
+}
+</script>
+
+</body>
+</html>
